@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - Cytech Limited</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="top-bar">
+        <div>🚀 Fast Countrywide Delivery in Kenya | Call / WhatsApp: +254 700 000 000</div>
+        <div class="top-bar-links">
+            <a href="Shop.html">Deals</a>
+            <a href="contact.html">Support</a>
+            <a href="registration.html">My Account</a>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header>
+        <div class="navbar">
+            <a href="cytech.html" class="logo-container">
+                <img src="image/1583909243054-removebg-preview.png" alt="Cytech Limited Logo">
+                <div class="logo-text">CYTECH <span>LIMITED</span></div>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="cytech.html">Home</a></li>
+                    <li><a href="Shop.html">Shop</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="registration.html" class="active">Account</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="wishlist.html" class="header-action-btn" title="View Wishlist">
+                    <span>❤️</span> Wishlist
+                    <span class="badge-count wishlist-count-badge" style="display: none;">0</span>
+                </a>
+                <button type="button" class="header-action-btn cart-header-btn" onclick="openCartDrawer()" title="View Cart">
+                    <span>🛒</span> Cart
+                    <span class="badge-count cart-count-badge" style="display: none;">0</span>
+                </button>
+            </div>
+        </div>
+    </header>   
+
+    <!-- REGISTRATION FORM -->
+    <main class="form"> 
+        <div class="signup-form">
+            <div style="text-align: center; margin-bottom: 25px;">
+                <h1 style="color: var(--primary); font-size: 26px; font-weight: 800;">Member Registration</h1> 
+                <p style="color: var(--text-muted); font-size: 14px;">Fill in your details below to create your Cytech account.</p>
+            </div>
+
+            <form id="regForm" onsubmit="handleRegistration(event)">
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="e.g. Fiona" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="e.g. Njoki" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail Address *</label>
+                    <input type="email" id="email" name="email" placeholder="fiona@example.com" required>
+                </div>
+
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" name="dob">
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <div style="display: flex; gap: 20px; align-items: center; padding-top: 10px;">
+                            <label style="display: flex; align-items: center; gap: 6px; font-weight: normal; cursor: pointer;">
+                                <input type="radio" id="female" name="gender" value="female" style="width: auto;"> Female
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 6px; font-weight: normal; cursor: pointer;">
+                                <input type="radio" id="male" name="gender" value="male" style="width: auto;"> Male
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="userPhoto">Profile / ID Photo (Optional)</label>
+                    <input type="file" id="userPhoto" name="userPhoto"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="accountType">Account / Category</label>
+                    <select name="accountType" id="accountType">
+                        <option value="individual">Personal Shopper</option>
+                        <option value="business">Corporate / Business Procurement</option>
+                        <option value="student">Student / Academic Member</option>
+                    </select>
+                </div>
+              
+                <div class="form-group">
+                    <label for="address">Delivery Address / Notes</label>
+                    <textarea id="address" rows="3" placeholder="Enter your city, street or campus residence"></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; font-size: 16px;">
+                    Complete Registration ➔
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo-container" style="margin-bottom: 15px;">
+                    <img src="image/1583909243054-removebg-preview.png" alt="Cytech Limited">
+                    <div class="logo-text">CYTECH <span>LIMITED</span></div>
+                </div>
+                <p>Providing quality technology solutions and services.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="cytech.html">Home</a>
+                <a href="Shop.html">Shop</a>
+                <a href="wishlist.html">Wishlist</a>
+                <a href="cart.html">Shopping Cart</a>
+                <a href="checkout.html">Checkout</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Customer Care</h3>
+                <a href="contact.html">Contact Us</a>
+                <a href="registration.html">Registration</a>
+                <a href="contact.html">Warranty Policy</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@cytechlimited.com</p>
+                <p>Phone: +254 700 000 000</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 Cytech Limited. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="products.js"></script>
+    <script src="store.js"></script>
+    <script>
+        function handleRegistration(e) {
+            e.preventDefault();
+            const first = document.getElementById("firstName").value;
+            showToast(`Welcome, ${first}! Your registration was successful.`, "success");
+            setTimeout(() => {
+                window.location.href = "Shop.html";
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

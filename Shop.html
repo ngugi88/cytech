@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Electronics - Cytech Limited</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="top-bar">
+        <div>🚀 Fast Countrywide Delivery in Kenya | Call / WhatsApp: +254 700 000 000</div>
+        <div class="top-bar-links">
+            <a href="Shop.html">Deals</a>
+            <a href="contact.html">Support</a>
+            <a href="registration.html">My Account</a>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="navbar">
+            <a href="cytech.html" class="logo-container">
+                <img src="image/1583909243054-removebg-preview.png" alt="Cytech Limited Logo">
+                <div class="logo-text">CYTECH <span>LIMITED</span></div>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="cytech.html">Home</a></li>
+                    <li><a href="Shop.html" class="active">Shop</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="registration.html">Account</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="wishlist.html" class="header-action-btn" title="View Wishlist">
+                    <span>❤️</span> Wishlist
+                    <span class="badge-count wishlist-count-badge" style="display: none;">0</span>
+                </a>
+                <button type="button" class="header-action-btn cart-header-btn" onclick="openCartDrawer()" title="View Cart">
+                    <span>🛒</span> Cart
+                    <span class="badge-count cart-count-badge" style="display: none;">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- SHOP HERO -->
+    <section class="shop-hero">
+        <h1>Our Electronics & Computer Shop</h1>
+        <p>Explore genuine business laptops, printers, projectors, networking accessories, and gaming gear with official warranty.</p>
+    </section>
+
+    <!-- SHOP CONTAINER -->
+    <main class="shop-container">
+
+        <!-- FILTERS SIDEBAR -->
+        <aside class="filters">
+            <h2>
+                <span>Filter Products</span>
+                <span style="font-size: 13px; font-weight: normal; color: var(--text-muted); cursor: pointer;" onclick="clearFilters()">Reset</span>
+            </h2>
+
+            <div class="filter-group">
+                <label for="searchInput">Search Keyword</label>
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Search HP, Canon, Mouse..."
+                    oninput="applyAllFilters()"
+                >
+            </div>
+
+            <div class="filter-group">
+                <label for="categoryFilter">Category</label>
+                <select id="categoryFilter" onchange="applyAllFilters()">
+                    <option value="all">All Categories</option>
+                    <option value="laptop">Laptops</option>
+                    <option value="printer">Printers</option>
+                    <option value="projector">Projectors</option>
+                    <option value="accessories">Accessories</option>
+                    <option value="networking">Networking</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="maxPriceInput">Max Price (KSh)</label>
+                <input 
+                    type="number" 
+                    id="maxPriceInput" 
+                    placeholder="e.g. 70000"
+                    min="1000"
+                    step="1000"
+                    oninput="applyAllFilters()"
+                >
+            </div>
+
+            <button type="button" class="filter-btn" onclick="applyAllFilters()">
+                Apply Filters
+            </button>
+
+            <button type="button" class="clear-btn" onclick="clearFilters()">
+                Clear All Filters
+            </button>
+
+            <!-- Quick Category Badges -->
+            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+                <label style="display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase;">Quick Browse</label>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    <button type="button" onclick="selectQuickCategory('laptop')" style="padding: 5px 10px; font-size: 12px; border: 1px solid var(--border-color); background: #f8fafc; border-radius: 4px; cursor: pointer;">💻 Laptops</button>
+                    <button type="button" onclick="selectQuickCategory('printer')" style="padding: 5px 10px; font-size: 12px; border: 1px solid var(--border-color); background: #f8fafc; border-radius: 4px; cursor: pointer;">🖨️ Printers</button>
+                    <button type="button" onclick="selectQuickCategory('projector')" style="padding: 5px 10px; font-size: 12px; border: 1px solid var(--border-color); background: #f8fafc; border-radius: 4px; cursor: pointer;">📽️ Projectors</button>
+                    <button type="button" onclick="selectQuickCategory('networking')" style="padding: 5px 10px; font-size: 12px; border: 1px solid var(--border-color); background: #f8fafc; border-radius: 4px; cursor: pointer;">📡 Networking</button>
+                    <button type="button" onclick="selectQuickCategory('accessories')" style="padding: 5px 10px; font-size: 12px; border: 1px solid var(--border-color); background: #f8fafc; border-radius: 4px; cursor: pointer;">🖱️ Accessories</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- PRODUCTS AREA -->
+        <section class="products-area">
+
+            <!-- Products Controls Header -->
+            <div class="products-header">
+                <div class="products-count" id="productCountDisplay">
+                    Showing <strong>6</strong> of <strong>6</strong> products
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <label for="sortFilter" style="font-size: 13px; font-weight: 600; color: var(--text-muted);">Sort By:</label>
+                    <select id="sortFilter" onchange="applyAllFilters()">
+                        <option value="featured">Featured / Recommended</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name-asc">Name: A to Z</option>
+                        <option value="rating">Top Customer Rated</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Dynamic Products Grid -->
+            <div class="products" id="productsGrid">
+                <!-- Products rendered via JS -->
+            </div>
+
+            <!-- Empty State Message -->
+            <div id="noProducts" class="no-products">
+                <h3>No Matching Products Found</h3>
+                <p>Try clearing your search query or adjusting your filters to see more results.</p>
+                <button type="button" class="btn-primary" onclick="clearFilters()" style="margin-top: 15px;">Clear Filters</button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo-container" style="margin-bottom: 15px;">
+                    <img src="image/1583909243054-removebg-preview.png" alt="Cytech Limited">
+                    <div class="logo-text">CYTECH <span>LIMITED</span></div>
+                </div>
+                <p>Providing quality technology solutions, laptops, projectors, printers, and gaming hardware with nationwide warranty coverage.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="cytech.html">Home</a>
+                <a href="Shop.html">Shop Catalog</a>
+                <a href="wishlist.html">Wishlist</a>
+                <a href="cart.html">Shopping Cart</a>
+                <a href="checkout.html">Checkout</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Categories</h3>
+                <a href="Shop.html?category=laptop">Business Laptops</a>
+                <a href="Shop.html?category=printer">Office Printers</a>
+                <a href="Shop.html?category=projector">HD Projectors</a>
+                <a href="Shop.html?category=networking">Networking & WiFi</a>
+                <a href="Shop.html?category=accessories">Computer Accessories</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Cytech</h3>
+                <p>📍 Nairobi CBD, Kenya</p>
+                <p>📞 Phone: +254 700 000 000</p>
+                <p>✉️ Email: info@cytechlimited.com</p>
+                <p>🕒 Mon - Sat: 8:00 AM - 6:00 PM</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 Cytech Limited. All Rights Reserved. Built for speed and reliability.
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="products.js"></script>
+    <script src="store.js"></script>
+    <script>
+        // Render products into the grid
+        function renderShopProducts(items) {
+            const grid = document.getElementById("productsGrid");
+            const noProducts = document.getElementById("noProducts");
+            const countDisplay = document.getElementById("productCountDisplay");
+            const totalProducts = getAllProducts().length;
+
+            if (!grid) return;
+
+            if (items.length === 0) {
+                grid.innerHTML = "";
+                noProducts.style.display = "block";
+                countDisplay.innerHTML = `Showing <strong>0</strong> of <strong>${totalProducts}</strong> products`;
+                return;
+            }
+
+            noProducts.style.display = "none";
+            countDisplay.innerHTML = `Showing <strong>${items.length}</strong> of <strong>${totalProducts}</strong> products`;
+
+            grid.innerHTML = items.map(p => {
+                const wishlisted = isInWishlist(p.id);
+                return `
+                    <div class="product-card" data-category="${p.category}" data-price="${p.price}">
+                        <div class="product-image">
+                            <span class="product-badge">${p.badge || 'GENUINE'}</span>
+                            <button 
+                                type="button" 
+                                class="wishlist-card-btn ${wishlisted ? 'active' : ''}" 
+                                onclick="handleWishlistClick(this, '${p.id}')"
+                                title="${wishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}"
+                            >
+                                ${wishlisted ? '❤️' : '♡'}
+                            </button>
+                            <a href="singleProduct.html?id=${p.id}">
+                                <img src="${p.image}" alt="${p.name}">
+                            </a>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category-tag">${p.categoryName}</span>
+                            <h3><a href="singleProduct.html?id=${p.id}">${p.name}</a></h3>
+                            <div class="product-rating-row">
+                                <span class="star-rating">${renderStarRating(p.rating)}</span>
+                                <span class="rating-count">(${p.reviewCount})</span>
+                            </div>
+                            <p>${p.shortDescription}</p>
+                            <div class="price-container">
+                                <span class="price">${formatKSh(p.price)}</span>
+                                ${p.originalPrice ? `<span class="original-price">${formatKSh(p.originalPrice)}</span>` : ''}
+                            </div>
+                            <div class="card-actions">
+                                <a href="singleProduct.html?id=${p.id}" class="btn-view">View Details</a>
+                                <button type="button" class="btn-cart" onclick="addToCart('${p.id}', 1, true)">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        function handleWishlistClick(btn, productId) {
+            const added = toggleWishlist(productId);
+            if (added) {
+                btn.classList.add("active");
+                btn.innerHTML = "❤️";
+                btn.title = "Remove from Wishlist";
+            } else {
+                btn.classList.remove("active");
+                btn.innerHTML = "♡";
+                btn.title = "Add to Wishlist";
+            }
+        }
+
+        // Filter and sort functions
+        function applyAllFilters() {
+            const query = (document.getElementById("searchInput").value || "").toLowerCase().trim();
+            const category = document.getElementById("categoryFilter").value;
+            const maxPrice = parseFloat(document.getElementById("maxPriceInput").value);
+            const sortBy = document.getElementById("sortFilter").value;
+
+            let filtered = getAllProducts().filter(p => {
+                // Search keyword match
+                const matchesQuery = !query || 
+                    p.name.toLowerCase().includes(query) || 
+                    p.description.toLowerCase().includes(query) ||
+                    p.categoryName.toLowerCase().includes(query);
+
+                // Category match
+                const matchesCategory = category === "all" || p.category.toLowerCase() === category.toLowerCase();
+
+                // Max price match
+                const matchesPrice = isNaN(maxPrice) || p.price <= maxPrice;
+
+                return matchesQuery && matchesCategory && matchesPrice;
+            });
+
+            // Sorting
+            if (sortBy === "price-low") {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortBy === "price-high") {
+                filtered.sort((a, b) => b.price - a.price);
+            } else if (sortBy === "name-asc") {
+                filtered.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (sortBy === "rating") {
+                filtered.sort((a, b) => b.rating - a.rating);
+            }
+
+            renderShopProducts(filtered);
+        }
+
+        function clearFilters() {
+            document.getElementById("searchInput").value = "";
+            document.getElementById("categoryFilter").value = "all";
+            document.getElementById("maxPriceInput").value = "";
+            document.getElementById("sortFilter").value = "featured";
+            applyAllFilters();
+        }
+
+        function selectQuickCategory(category) {
+            document.getElementById("categoryFilter").value = category;
+            applyAllFilters();
+        }
+
+        // Initialize from URL parameters (e.g. ?category=laptop or ?search=hp)
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const catParam = urlParams.get("category");
+            const searchParam = urlParams.get("search");
+
+            if (catParam) {
+                const select = document.getElementById("categoryFilter");
+                if (select.querySelector(`option[value="${catParam}"]`)) {
+                    select.value = catParam;
+                }
+            }
+
+            if (searchParam) {
+                document.getElementById("searchInput").value = searchParam;
+            }
+
+            applyAllFilters();
+        });
+    </script>
+</body>
+</html>

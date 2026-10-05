@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout - Cytech Limited</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div>🔒 256-bit SSL Encrypted Secure Checkout | Official Kenyan Tech Guarantee</div>
+        <div class="top-bar-links">
+            <a href="Shop.html">Continue Shopping</a>
+            <a href="contact.html">Need Help?</a>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="navbar">
+            <a href="cytech.html" class="logo-container">
+                <img src="image/1583909243054-removebg-preview.png" alt="Cytech Limited Logo">
+                <div class="logo-text">CYTECH <span>LIMITED</span></div>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="cytech.html">Home</a></li>
+                    <li><a href="Shop.html">Shop</a></li>
+                    <li><a href="cart.html">Shopping Cart</a></li>
+                    <li><a href="contact.html">Help</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <span style="font-size: 13px; font-weight: 700; color: #bfdbfe; display: flex; align-items: center; gap: 6px;">
+                    🛡️ Verified Merchant
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- CHECKOUT WRAPPER -->
+    <main class="checkout-wrapper">
+        <h1 style="font-size: 28px; font-weight: 800; margin-bottom: 25px; color: var(--dark);">Checkout & Order Placement</h1>
+
+        <div id="checkoutEmptyWarning" style="display: none; background: white; padding: 50px 20px; text-align: center; border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+            <div style="font-size: 48px; margin-bottom: 15px;">🛒</div>
+            <h2>Your Cart is Empty</h2>
+            <p style="margin: 10px 0 20px; color: var(--text-muted);">Please add items to your cart before proceeding to checkout.</p>
+            <a href="Shop.html" class="btn-primary">Go to Shop</a>
+        </div>
+
+        <div id="checkoutGrid" class="checkout-grid">
+            
+            <!-- LEFT COLUMN: CHECKOUT FORM -->
+            <div class="checkout-form-box">
+                <form id="checkoutForm" onsubmit="handlePlaceOrder(event)">
+                    
+                    <!-- STEP 1: CONTACT INFO -->
+                    <div class="checkout-section-title">
+                        <span class="step-num">1</span>
+                        <span>Customer Contact Information</span>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="custFirstName">First Name *</label>
+                            <input type="text" id="custFirstName" placeholder="e.g. Dennis" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="custLastName">Last Name *</label>
+                            <input type="text" id="custLastName" placeholder="e.g. Mwangi" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="custPhone">Phone Number (M-Pesa enabled) *</label>
+                            <input type="tel" id="custPhone" placeholder="e.g. 0712 345 678" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="custEmail">Email Address (for Receipt) *</label>
+                            <input type="email" id="custEmail" placeholder="e.g. dennis@example.com" required>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: SHIPPING ADDRESS -->
+                    <div class="checkout-section-title" style="margin-top: 30px;">
+                        <span class="step-num">2</span>
+                        <span>Delivery Address & Destination</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="custAddress">Street Address / Building / Office *</label>
+                        <input type="text" id="custAddress" placeholder="e.g. Kimathi Street, Pioneer House, 3rd Floor" required>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="custTown">Town / City *</label>
+                            <input type="text" id="custTown" placeholder="e.g. Nairobi CBD" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="custCounty">County *</label>
+                            <select id="custCounty" required>
+                                <option value="Nairobi">Nairobi</option>
+                                <option value="Kiambu">Kiambu</option>
+                                <option value="Mombasa">Mombasa</option>
+                                <option value="Nakuru">Nakuru</option>
+                                <option value="Kisumu">Kisumu</option>
+                                <option value="Uasin Gishu">Uasin Gishu (Eldoret)</option>
+                                <option value="Machakos">Machakos</option>
+                                <option value="Kajiado">Kajiado</option>
+                                <option value="Other">Other Region / Countrywide</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="custNotes">Special Delivery Notes (Optional)</label>
+                        <input type="text" id="custNotes" placeholder="e.g. Call upon arrival at gate 2">
+                    </div>
+
+                    <!-- STEP 3: PAYMENT METHOD -->
+                    <div class="checkout-section-title" style="margin-top: 30px;">
+                        <span class="step-num">3</span>
+                        <span>Select Payment Method</span>
+                    </div>
+
+                    <div class="payment-methods-grid">
+                        <div class="payment-method-card active" id="tabMpesa" onclick="selectPayment('mpesa')">
+                            <div class="method-icon">📱</div>
+                            <div class="method-title">M-Pesa Express</div>
+                        </div>
+                        <div class="payment-method-card" id="tabCard" onclick="selectPayment('card')">
+                            <div class="method-icon">💳</div>
+                            <div class="method-title">Debit / Credit Card</div>
+                        </div>
+                        <div class="payment-method-card" id="tabCod" onclick="selectPayment('cod')">
+                            <div class="method-icon">💵</div>
+                            <div class="method-title">Cash on Delivery</div>
+                        </div>
+                    </div>
+
+                    <!-- M-PESA PANEL -->
+                    <div id="panelMpesa" class="payment-details-panel">
+                        <h4 style="margin-bottom: 8px; color: #166534; font-size: 15px;">Lipa na M-Pesa Online (STK Push)</h4>
+                        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
+                            An instant payment prompt will appear on your phone screen to enter your M-Pesa PIN once you click "Complete Order".
+                        </p>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="mpesaPhone">M-Pesa Number</label>
+                            <input type="tel" id="mpesaPhone" placeholder="07XX XXX XXX">
+                        </div>
+                    </div>
+
+                    <!-- CARD PANEL -->
+                    <div id="panelCard" class="payment-details-panel" style="display: none;">
+                        <h4 style="margin-bottom: 8px; font-size: 15px;">Visa / Mastercard Secure Payment</h4>
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber" placeholder="4242 •••• •••• ••••" maxlength="19">
+                        </div>
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="cardExpiry">Expiry Date</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardCvv">CVV Code</label>
+                                <input type="password" id="cardCvv" placeholder="123" maxlength="4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COD PANEL -->
+                    <div id="panelCod" class="payment-details-panel" style="display: none;">
+                        <h4 style="margin-bottom: 8px; font-size: 15px;">Pay on Delivery (COD)</h4>
+                        <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+                            Inspect your products upon delivery. Pay via M-Pesa or Cash directly to the verified Cytech courier after receiving and testing your package.
+                        </p>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; font-size: 17px; margin-top: 20px;">
+                        Place & Confirm Order ➔
+                    </button>
+
+                </form>
+            </div>
+
+            <!-- RIGHT COLUMN: ORDER SUMMARY SIDEBAR -->
+            <div class="summary-card" style="position: sticky; top: 90px;">
+                <h3>Your Order Items</h3>
+
+                <div id="checkoutItemsList" style="max-height: 320px; overflow-y: auto; margin-bottom: 20px; padding-right: 5px;">
+                    <!-- Filled dynamically -->
+                </div>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <strong id="chkSubtotal">KSh 0</strong>
+                </div>
+
+                <div class="summary-row" id="chkDiscountRow" style="display: none; color: #ef4444;">
+                    <span>Discount</span>
+                    <strong id="chkDiscount">- KSh 0</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Shipping Fee</span>
+                    <strong id="chkShipping">KSh 0</strong>
+                </div>
+
+                <div class="summary-row total-row">
+                    <span>Total Due</span>
+                    <span id="chkTotal">KSh 0</span>
+                </div>
+
+                <div style="margin-top: 20px; padding: 12px; background: #f8fafc; border-radius: var(--radius-sm); font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+                    🔒 All transactions are encrypted with industry-standard 256-bit SSL encryption. Cytech Limited never stores raw banking data.
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ORDER CONFIRMATION MODAL -->
+    <div id="orderSuccessModal" class="modal-overlay">
+        <div class="order-success-modal">
+            <div class="success-check-circle">✓</div>
+            <h2>Order Confirmed!</h2>
+            <p style="color: var(--text-muted); margin-bottom: 15px;">Thank you for shopping with Cytech Limited. Your order has been placed successfully.</p>
+            
+            <div class="order-receipt-box">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <strong>Order Number:</strong>
+                    <span id="receiptOrderId" style="color: var(--primary); font-weight: 700;">CY-2026-9812</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <strong>Customer:</strong>
+                    <span id="receiptCustomer">Dennis Mwangi</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <strong>Destination:</strong>
+                    <span id="receiptAddress">Nairobi, Kenya</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <strong>Payment Mode:</strong>
+                    <span id="receiptPayment">M-Pesa Express</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--border-color); font-size: 15px;">
+                    <strong>Total Amount:</strong>
+                    <strong id="receiptAmount" style="color: var(--primary);">KSh 0</strong>
+                </div>
+            </div>
+
+            <p style="font-size: 13px; color: #166534; background: #ecfdf5; padding: 10px; border-radius: var(--radius-sm); margin-bottom: 20px;">
+                📦 An SMS and email confirmation with your real-time tracking link have been dispatched.
+            </p>
+
+            <div style="display: flex; gap: 10px;">
+                <button type="button" class="btn-primary" style="flex: 1;" onclick="window.location.href = 'cytech.html'">Back to Home</button>
+                <button type="button" class="btn-primary" style="flex: 1; background: #0f172a;" onclick="window.location.href = 'Shop.html'">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo-container" style="margin-bottom: 15px;">
+                    <img src="image/1583909243054-removebg-preview.png" alt="Cytech Limited">
+                    <div class="logo-text">CYTECH <span>LIMITED</span></div>
+                </div>
+                <p>Authentic computing devices, accessories, printers, and smart technology solutions for business and home users.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="cytech.html">Home</a>
+                <a href="Shop.html">Shop Catalog</a>
+                <a href="wishlist.html">Wishlist</a>
+                <a href="cart.html">Shopping Cart</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Customer Protection</h3>
+                <a href="contact.html">Terms of Service</a>
+                <a href="contact.html">Privacy Policy</a>
+                <a href="contact.html">Warranty Policy</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📍 Nairobi, Kenya</p>
+                <p>📞 Phone: +254 700 000 000</p>
+                <p>✉️ Email: info@cytechlimited.com</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 Cytech Limited. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="products.js"></script>
+    <script src="store.js"></script>
+    <script>
+        let selectedPaymentMethod = "mpesa";
+
+        function selectPayment(method) {
+            selectedPaymentMethod = method;
+            document.querySelectorAll(".payment-method-card").forEach(c => c.classList.remove("active"));
+            document.getElementById("panelMpesa").style.display = "none";
+            document.getElementById("panelCard").style.display = "none";
+            document.getElementById("panelCod").style.display = "none";
+
+            if (method === "mpesa") {
+                document.getElementById("tabMpesa").classList.add("active");
+                document.getElementById("panelMpesa").style.display = "block";
+            } else if (method === "card") {
+                document.getElementById("tabCard").classList.add("active");
+                document.getElementById("panelCard").style.display = "block";
+            } else if (method === "cod") {
+                document.getElementById("tabCod").classList.add("active");
+                document.getElementById("panelCod").style.display = "block";
+            }
+        }
+
+        function renderCheckoutSummary() {
+            const details = getCartDetails();
+            const warning = document.getElementById("checkoutEmptyWarning");
+            const grid = document.getElementById("checkoutGrid");
+            const itemsList = document.getElementById("checkoutItemsList");
+
+            if (details.items.length === 0) {
+                warning.style.display = "block";
+                grid.style.display = "none";
+                return;
+            }
+
+            warning.style.display = "none";
+            grid.style.display = "grid";
+
+            // Render item list
+            itemsList.innerHTML = details.items.map(item => `
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color);">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <img src="${item.product.image}" alt="${item.product.name}" style="width: 44px; height: 44px; object-fit: contain; background: #f8fafc; border-radius: 4px; border: 1px solid var(--border-color);">
+                        <div>
+                            <div style="font-size: 13px; font-weight: 700; color: var(--dark); line-height: 1.2;">${item.product.name}</div>
+                            <div style="font-size: 11px; color: var(--text-muted);">Qty: ${item.quantity} &times; ${formatKSh(item.product.price)}</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 13px; font-weight: 700; color: var(--primary);">${formatKSh(item.lineTotal)}</div>
+                </div>
+            `).join("");
+
+            document.getElementById("chkSubtotal").textContent = formatKSh(details.subtotal);
+            const discountRow = document.getElementById("chkDiscountRow");
+            if (details.discount > 0) {
+                discountRow.style.display = "flex";
+                document.getElementById("chkDiscount").textContent = `- ${formatKSh(details.discount)}`;
+            } else {
+                discountRow.style.display = "none";
+            }
+
+            document.getElementById("chkShipping").textContent = details.shipping === 0 ? "FREE" : formatKSh(details.shipping);
+            document.getElementById("chkTotal").textContent = formatKSh(details.total);
+        }
+
+        function handlePlaceOrder(e) {
+            e.preventDefault();
+            const details = getCartDetails();
+            if (details.items.length === 0) {
+                showToast("Your cart is empty!", "error");
+                return;
+            }
+
+            const firstName = document.getElementById("custFirstName").value.trim();
+            const lastName = document.getElementById("custLastName").value.trim();
+            const phone = document.getElementById("custPhone").value.trim();
+            const email = document.getElementById("custEmail").value.trim();
+            const address = document.getElementById("custAddress").value.trim();
+            const town = document.getElementById("custTown").value.trim();
+            const county = document.getElementById("custCounty").value;
+
+            // Generate order ID
+            const orderId = "CY-" + new Date().getFullYear() + "-" + Math.floor(10000 + Math.random() * 90000);
+
+            let paymentLabel = "M-Pesa Express";
+            if (selectedPaymentMethod === "card") paymentLabel = "Credit/Debit Card";
+            if (selectedPaymentMethod === "cod") paymentLabel = "Cash on Delivery";
+
+            // Populate Modal Receipt
+            document.getElementById("receiptOrderId").textContent = orderId;
+            document.getElementById("receiptCustomer").textContent = `${firstName} ${lastName} (${phone})`;
+            document.getElementById("receiptAddress").textContent = `${address}, ${town}, ${county}`;
+            document.getElementById("receiptPayment").textContent = paymentLabel;
+            document.getElementById("receiptAmount").textContent = formatKSh(details.total);
+
+            // Open Modal
+            document.getElementById("orderSuccessModal").classList.add("active");
+
+            // Clear Cart in background
+            clearCart();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderCheckoutSummary();
+        });
+    </script>
+</body>
+</html>

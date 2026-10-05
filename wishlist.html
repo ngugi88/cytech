@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist - Cytech Limited</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div>🚀 Fast Countrywide Delivery in Kenya | Call / WhatsApp: +254 700 000 000</div>
+        <div class="top-bar-links">
+            <a href="Shop.html">Deals</a>
+            <a href="contact.html">Support</a>
+            <a href="registration.html">My Account</a>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="navbar">
+            <a href="cytech.html" class="logo-container">
+                <img src="image/1583909243054-removebg-preview.png" alt="Cytech Limited Logo">
+                <div class="logo-text">CYTECH <span>LIMITED</span></div>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="cytech.html">Home</a></li>
+                    <li><a href="Shop.html">Shop</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="registration.html">Account</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="wishlist.html" class="header-action-btn" style="background: rgba(255,255,255,0.3);" title="View Wishlist">
+                    <span>❤️</span> Wishlist
+                    <span class="badge-count wishlist-count-badge" style="display: none;">0</span>
+                </a>
+                <button type="button" class="header-action-btn cart-header-btn" onclick="openCartDrawer()" title="View Cart">
+                    <span>🛒</span> Cart
+                    <span class="badge-count cart-count-badge" style="display: none;">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN WISHLIST WRAPPER -->
+    <main class="wishlist-wrapper">
+        <div class="wishlist-header">
+            <div>
+                <h1 style="font-size: 28px; font-weight: 800; color: var(--dark); margin-bottom: 6px;">My Saved Wishlist</h1>
+                <p style="color: var(--text-muted); font-size: 14px;">Products you've saved for later. Move them to your cart whenever you are ready to purchase.</p>
+            </div>
+            <button type="button" id="btnClearWishlist" class="btn-secondary" style="color: var(--dark); padding: 8px 16px; font-size: 13px; display: none;" onclick="clearAllWishlist()">
+                Clear All
+            </button>
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div id="wishlistEmptyState" class="empty-drawer" style="display: none; background: white; padding: 60px 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+            <div class="empty-icon">❤️</div>
+            <h2>Your Wishlist is Currently Empty</h2>
+            <p style="margin: 10px 0 25px;">You haven't saved any items yet. Explore our shop and click the heart icon on any product to save it here!</p>
+            <a href="Shop.html" class="btn-primary">Browse Shop Catalog</a>
+        </div>
+
+        <!-- WISHLIST PRODUCTS GRID -->
+        <div class="products" id="wishlistGrid">
+            <!-- Populated dynamically -->
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo-container" style="margin-bottom: 15px;">
+                    <img src="image/1583909243054-removebg-preview.png" alt="Cytech Limited">
+                    <div class="logo-text">CYTECH <span>LIMITED</span></div>
+                </div>
+                <p>Authentic computing devices, accessories, printers, and smart technology solutions for business and home users.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="cytech.html">Home</a>
+                <a href="Shop.html">Shop Catalog</a>
+                <a href="wishlist.html">Wishlist</a>
+                <a href="cart.html">Shopping Cart</a>
+                <a href="checkout.html">Checkout</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Support</h3>
+                <a href="contact.html">Contact Us</a>
+                <a href="registration.html">Account</a>
+                <a href="contact.html">Warranty Policy</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📍 Nairobi, Kenya</p>
+                <p>📞 Phone: +254 700 000 000</p>
+                <p>✉️ Email: info@cytechlimited.com</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 Cytech Limited. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="products.js"></script>
+    <script src="store.js"></script>
+    <script>
+        function renderWishlistPage() {
+            const list = getWishlist();
+            const emptyState = document.getElementById("wishlistEmptyState");
+            const grid = document.getElementById("wishlistGrid");
+            const clearBtn = document.getElementById("btnClearWishlist");
+
+            if (list.length === 0) {
+                emptyState.style.display = "block";
+                grid.innerHTML = "";
+                clearBtn.style.display = "none";
+                return;
+            }
+
+            emptyState.style.display = "none";
+            clearBtn.style.display = "inline-block";
+
+            const items = list.map(id => getProductById(id)).filter(p => p !== null);
+
+            grid.innerHTML = items.map(p => `
+                <div class="product-card" data-id="${p.id}">
+                    <div class="product-image">
+                        <span class="product-badge">${p.badge || 'SAVED'}</span>
+                        <button type="button" class="wishlist-card-btn active" onclick="removeFromWishlistPage('${p.id}')" title="Remove from Wishlist">
+                            ❤️
+                        </button>
+                        <a href="singleProduct.html?id=${p.id}">
+                            <img src="${p.image}" alt="${p.name}">
+                        </a>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category-tag">${p.categoryName}</span>
+                        <h3><a href="singleProduct.html?id=${p.id}">${p.name}</a></h3>
+                        <div class="product-rating-row">
+                            <span class="star-rating">${renderStarRating(p.rating)}</span>
+                            <span class="rating-count">(${p.reviewCount})</span>
+                        </div>
+                        <p>${p.shortDescription}</p>
+                        <div class="price-container">
+                            <span class="price">${formatKSh(p.price)}</span>
+                            ${p.originalPrice ? `<span class="original-price">${formatKSh(p.originalPrice)}</span>` : ''}
+                        </div>
+                        <div class="card-actions">
+                            <a href="singleProduct.html?id=${p.id}" class="btn-view">View Details</a>
+                            <button type="button" class="btn-cart" onclick="moveToCart('${p.id}')">Move to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        function removeFromWishlistPage(productId) {
+            toggleWishlist(productId);
+            renderWishlistPage();
+        }
+
+        function moveToCart(productId) {
+            addToCart(productId, 1, true);
+            toggleWishlist(productId);
+            renderWishlistPage();
+        }
+
+        function clearAllWishlist() {
+            if (confirm("Clear all items from your wishlist?")) {
+                localStorage.removeItem(STORAGE_KEYS.WISHLIST);
+                updateHeaderBadges();
+                renderWishlistPage();
+                showToast("Wishlist cleared.", "info");
+            }
+        }
+
+        window.addEventListener("cytech:wishlist-updated", () => {
+            renderWishlistPage();
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderWishlistPage();
+        });
+    </script>
+</body>
+</html>
